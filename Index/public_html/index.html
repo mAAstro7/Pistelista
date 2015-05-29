@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Muistilista</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/todos.css">
+    </head>
+    <body ng-app="TodoApp">
+        <div ng-controller="TodoController">
+            <h1>Muistilista</h1>
+            <div id="todo-container">
+                <div id="add-todo-container">
+                  <input type="text" placeholder="Uusi tehtävä" ng-model="newKurssi">
+                  <input type="text" placeholder="Monta noppaa" ng-model="newKurssiNopat">
+                  <button ng-click="addTodo()">Lisää tehtävä</button>
+                  <button id="mark-todos-done" ng-click="allTodosDone()">Merkkaa kaikki tehdyiksi</button>
+                  <button id="remove-todos" ng-click="removeAllTodos()">Poista kaikki</button>
+                </div>
+                
+                <div class="todo" ng-repeat="todo in kurssit">
+                  <input type="text" ng-model="todo.op" ng-blur="order()" class="todo-priority">
+                  <label>
+                    <input type="checkbox" ng-model="todo.done"> <span ng-class="{ 'todo-done': todo.done }">{{todo.task}}</span>
+                  </label>
+                  <button class="remove-todo" ng-click="removeTodo($index)">Poista</button>
+                </div>
+
+                <div id="todo-footer">
+                    {{todosDone}} <span ng-pluralize count="todosDone" when="{ '0': 'tehtävää', 'one': 'tehtävä', 'other': 'tehtävää' }"></span> tehty, {{todos.length - todosDone}} <span ng-pluralize count="todos.length - todosDone" when="{ '0': 'tehtävää', 'one': 'tehtävä', 'other': 'tehtävää' }"></span> jäljellä
+                </div>
+            </div>
+        </div>
+
+        <script src="bower_components/angular/angular.min.js"></script>
+        <script src="app/app.js"></script>
+        <script src="app/controllers/todo_controller.js"></script>
+    </body>
+</html>
