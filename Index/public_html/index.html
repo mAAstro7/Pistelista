@@ -9,36 +9,37 @@ and open the template in the editor.
         <title>Muistilista</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="css/todos.css">
+
     </head>
-    <body ng-app="TodoApp">
-        <div ng-controller="TodoController">
-            <h1>Muistilista</h1>
-            <div id="todo-container">
-                <div id="add-todo-container">
-                  <input type="text" placeholder="Uusi tehtävä" ng-model="newKurssi">
-                  <input type="text" placeholder="Monta noppaa" ng-model="newKurssiNopat">
-                  <button ng-click="addTodo()">Lisää tehtävä</button>
-                  <button id="mark-todos-done" ng-click="allTodosDone()">Merkkaa kaikki tehdyiksi</button>
-                  <button id="remove-todos" ng-click="removeAllTodos()">Poista kaikki</button>
-                </div>
-                
-                <div class="todo" ng-repeat="todo in kurssit">
-                  <input type="text" ng-model="todo.op" ng-blur="order()" class="todo-priority">
-                  <label>
-                    <input type="checkbox" ng-model="todo.done"> <span ng-class="{ 'todo-done': todo.done }">{{todo.task}}</span>
-                  </label>
-                  <button class="remove-todo" ng-click="removeTodo($index)">Poista</button>
-                </div>
+    <body ng-app="KurssiApp">
+        <div ng-controller="KurssiController">
+            <form name="KurssiForm">
+                <h1>Kurssilista</h1>
+                <div id="kurssi-container">
+                    <div id="add-kurssi-container">
+                        <input type="text" placeholder="Uusi kurssi" ng-model="newKurssi" ng-minlength="3">
+                        <input id="newKurssiNopat" type="text" placeholder="Monta noppaa" ng-model="newKurssiNopat" required ng-pattern="/^[1-9]/">
+                        <button ng-click="addKurssi()" ng-disabled="KurssiForm.$invalid">Lisää kurssi</button>
+                    </div>
+                    <div class="kurssi" ng-repeat="kurssi in kurssit">           
+                        <label>
+                            <span>Kurssi: {{kurssi.task}}</span> 
+                            <span type="text" ng-model="kurssi.op">, opintopisteitä: {{kurssi.op}}</span>
+                        </label>
+                        <button class="remove-kurssi" ng-click="removeKurssi($index)">Poista</button>
+                    </div>
 
-                <div id="todo-footer">
-                    {{todosDone}} <span ng-pluralize count="todosDone" when="{ '0': 'tehtävää', 'one': 'tehtävä', 'other': 'tehtävää' }"></span> tehty, {{todos.length - todosDone}} <span ng-pluralize count="todos.length - todosDone" when="{ '0': 'tehtävää', 'one': 'tehtävä', 'other': 'tehtävää' }"></span> jäljellä
                 </div>
-            </div>
+        <input type="text" placeholder="Uusi opiskelija" ng-model="newStudent">
+        <button ng-click="addStudent()">Lisää opiskelija</button>
+        <div class="kurssi" ng-repeat="student in students"> 
+            <label>
+                <span>Nimi: {{student.name}}</span> 
+            </label>
         </div>
-
+        </div>
         <script src="bower_components/angular/angular.min.js"></script>
         <script src="app/app.js"></script>
-        <script src="app/controllers/todo_controller.js"></script>
+        <script src="app/controllers/course_controller.js"></script>
     </body>
 </html>

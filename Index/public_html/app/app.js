@@ -1,1 +1,1 @@
-var TodoApp = angular.module('TodoApp', []);
+var KurssiApp = angular.module('KurssiApp', []);
