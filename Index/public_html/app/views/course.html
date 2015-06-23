@@ -1,0 +1,23 @@
+<div ng-controller="CourseController">
+        <h1>Kurssin nimi</h1>
+        <input type="text" placeholder="Kurssin nimi" ng-model="newCourse">
+        
+        <div id="kurssi-container">
+            
+            <div>
+                <div>Tehtävä</div>
+                <div>Maksimi pisteet</div>
+                <input type="text" placeholder="Uusi tehtävä" ng-model="newTask">
+                <input type="text" placeholder="Monta pistettä" ng-model="newTaskPoints">
+                <button ng-click="addTask()">Lisää tehtävä</button>
+            </div>
+            
+            <div ng-repeat="course in courses">
+                <input type="text" value="{{course.task}}" ng-model="newTask">
+                <input type="text" value="{{course.points}}" ng-model="newTaskPoints">
+                <button ng-click="removeKurssi($index)">Poista</button>
+            </div>
+            
+        </div>
+        
+</div>

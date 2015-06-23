@@ -1,37 +1,21 @@
-KurssiApp.controller('KurssiController', function ($scope) {
-    $scope.kurssit = [];
+CourseApp.controller('CourseController', function ($scope) {
+    $scope.courses = [];
     $scope.students = [];
 
-
-    $scope.removeAllCourses = function () {
-        $scope.kurssit = [];
+    $scope.removeAllTasks = function () {
+        $scope.courses = [];
     };
 
-    $scope.addTehtava = function () {
-        if ($scope.newTehtava !== '') {
-            $scope.kurssit.push({
-                task: $scope.newTehtava,
-                op: $scope.newKurssiNopat
-            });
-
-            $scope.newTehtava = '';
-            $scope.newKurssiNopat = '';
-
-        }
-    };
-
-    $scope.addStudent = function () {
-        if ($scope.newStudent !== '') {
-            $scope.students.push({
-                name: $scope.newStudent
-            });
-
-            $scope.newStudent = '';
-
-        }
+    $scope.addTask = function () {
+        $scope.courses.push({
+            task: $scope.newTask,
+            points: $scope.newTaskPoints
+        });
+        $scope.newTask = '';
+        $scope.newTaskPoints = '';
     };
     
-    $scope.removeKurssi = function (index) {
+    $scope.removeTask = function (index) {
         $scope.kurssit.splice(index, 1);
         $scope.order();
     };

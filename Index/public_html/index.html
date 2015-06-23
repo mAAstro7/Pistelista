@@ -1,47 +1,16 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>Kurssilista</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     </head>
-    <body ng-app="KurssiApp">
-        <div ng-controller="KurssiController">
-            <form name="KurssiForm">
-                <h1>Kurssin nimi</h1>
-                <input type="text" placeholder="Kurssin nimi" ng-model="newKurssi">
-                <div id="kurssi-container">
-                    <div id="add-kurssi-container">
-                        <table style="width:55%">
-  <tr>
-    <td>Tehtävä</td>
-    <td>Maksimi pisteet</td>		
-  </tr>
-  </table>
-                        <input type="text" placeholder="Uusi tehtävä" ng-model="newTehtava" ng-minlength="3">
-                        <input id="newKurssiNopat" type="text" placeholder="Monta pistettä" ng-model="newKurssiNopat" required ng-pattern="/^[1-9]/">
-                        <button ng-click="addTehtava()" ng-disabled="KurssiForm.$invalid">Lisää tehtävä</button>
-
-                    </div>
-                    <div class="kurssi" ng-repeat="kurssi in kurssit">
-                        <label>
-                            <input type="text" placeholder="{{kurssi.task}}" ng-model="newTehtava" ng-minlength="3">
-                            <input id="newKurssiNopat" type="text" placeholder="{{kurssi.op}}" ng-model="newKurssiNopat" required ng-pattern="/^[1-9]/">
-                        </label>
-                        <button class="remove-kurssi" ng-click="removeKurssi($index)">Poista</button>
-                    </div>
-                        <span>Kurssi: {{kurssi.task}}</span> 
-                        <span type="text" ng-model="kurssi.op">, opintopisteitä: {{kurssi.op}}</span>
-                </div>
-      
-        </div>
+    <body ng-app="CourseApp">
+        
+        <div ng-view></div>
+        
         <script src="bower_components/angular/angular.min.js"></script>
+        <script src="bower_components/angular-route/angular-route.min.js"></script>
         <script src="app/app.js"></script>
         <script src="app/controllers/course_controller.js"></script>
     </body>
