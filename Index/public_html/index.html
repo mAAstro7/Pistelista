@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Muistilista</title>
+        <title>Kurssilista</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -14,29 +14,32 @@ and open the template in the editor.
     <body ng-app="KurssiApp">
         <div ng-controller="KurssiController">
             <form name="KurssiForm">
-                <h1>Kurssilista</h1>
+                <h1>Kurssin nimi</h1>
+                <input type="text" placeholder="Kurssin nimi" ng-model="newKurssi">
                 <div id="kurssi-container">
                     <div id="add-kurssi-container">
-                        <input type="text" placeholder="Uusi kurssi" ng-model="newKurssi" ng-minlength="3">
-                        <input id="newKurssiNopat" type="text" placeholder="Monta noppaa" ng-model="newKurssiNopat" required ng-pattern="/^[1-9]/">
-                        <button ng-click="addKurssi()" ng-disabled="KurssiForm.$invalid">Lisää kurssi</button>
+                        <table style="width:55%">
+  <tr>
+    <td>Tehtävä</td>
+    <td>Maksimi pisteet</td>		
+  </tr>
+  </table>
+                        <input type="text" placeholder="Uusi tehtävä" ng-model="newTehtava" ng-minlength="3">
+                        <input id="newKurssiNopat" type="text" placeholder="Monta pistettä" ng-model="newKurssiNopat" required ng-pattern="/^[1-9]/">
+                        <button ng-click="addTehtava()" ng-disabled="KurssiForm.$invalid">Lisää tehtävä</button>
+
                     </div>
-                    <div class="kurssi" ng-repeat="kurssi in kurssit">           
+                    <div class="kurssi" ng-repeat="kurssi in kurssit">
                         <label>
-                            <span>Kurssi: {{kurssi.task}}</span> 
-                            <span type="text" ng-model="kurssi.op">, opintopisteitä: {{kurssi.op}}</span>
+                            <input type="text" placeholder="{{kurssi.task}}" ng-model="newTehtava" ng-minlength="3">
+                            <input id="newKurssiNopat" type="text" placeholder="{{kurssi.op}}" ng-model="newKurssiNopat" required ng-pattern="/^[1-9]/">
                         </label>
                         <button class="remove-kurssi" ng-click="removeKurssi($index)">Poista</button>
                     </div>
-
+                        <span>Kurssi: {{kurssi.task}}</span> 
+                        <span type="text" ng-model="kurssi.op">, opintopisteitä: {{kurssi.op}}</span>
                 </div>
-        <input type="text" placeholder="Uusi opiskelija" ng-model="newStudent">
-        <button ng-click="addStudent()">Lisää opiskelija</button>
-        <div class="kurssi" ng-repeat="student in students"> 
-            <label>
-                <span>Nimi: {{student.name}}</span> 
-            </label>
-        </div>
+      
         </div>
         <script src="bower_components/angular/angular.min.js"></script>
         <script src="app/app.js"></script>

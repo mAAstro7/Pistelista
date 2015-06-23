@@ -7,14 +7,14 @@ KurssiApp.controller('KurssiController', function ($scope) {
         $scope.kurssit = [];
     };
 
-    $scope.addKurssi = function () {
-        if ($scope.newKurssi !== '') {
+    $scope.addTehtava = function () {
+        if ($scope.newTehtava !== '') {
             $scope.kurssit.push({
-                task: $scope.newKurssi,
+                task: $scope.newTehtava,
                 op: $scope.newKurssiNopat
             });
 
-            $scope.newKurssi = '';
+            $scope.newTehtava = '';
             $scope.newKurssiNopat = '';
 
         }
