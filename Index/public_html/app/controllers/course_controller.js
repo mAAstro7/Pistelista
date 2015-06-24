@@ -1,23 +1,30 @@
-CourseApp.controller('CourseController', function ($scope) {
-    $scope.courses = [];
-    $scope.students = [];
+CourseApp.controller('CourseController', function ($scope, FirebaseService) {
+
+    $scope.courses = FirebaseService.getCourses();
+//    $scope.courses = [{
+//            task: '',
+//            points: ''
+//        }]
+    $scope.students = [{number: ''}];
+    $scope.courseName = '';
+
 
     $scope.removeAllTasks = function () {
         $scope.courses = [];
     };
 
     $scope.addTask = function () {
-        $scope.courses.push({
+ 
+        FirebaseService.addCourse({
             task: $scope.newTask,
             points: $scope.newTaskPoints
         });
         $scope.newTask = '';
         $scope.newTaskPoints = '';
     };
-    
+
     $scope.removeTask = function (index) {
-        $scope.kurssit.splice(index, 1);
-        $scope.order();
+        $scope.courses.splice(index, 1);
     };
 
 });

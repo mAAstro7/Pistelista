@@ -1,7 +1,14 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+CourseApp.service('FirebaseService', function ($firebase) {
+    var firebaseRef = new Firebase('https://glowing-fire-807.firebaseio.com/courses');
+    var sync = $firebase(firebaseRef);
+    var courses = sync.$asArray();
+    
+    this.addCourse = function (course) {
+        courses.$add(course);
+    }
+    
+    this.getCourses = function () {
+        return courses;
+    }
 
-
+});

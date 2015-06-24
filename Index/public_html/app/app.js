@@ -1,10 +1,14 @@
-var CourseApp = angular.module('CourseApp', ['ngRoute']);
+var CourseApp = angular.module('CourseApp', ['ngRoute', 'firebase']);
 
 CourseApp.config(function($routeProvider){
     $routeProvider
     .when('/', {
       controller: 'CourseController',
       templateUrl: 'app/views/course.html'
+    })
+    .when('/student', {
+      controller: 'CourseController',
+      templateUrl: 'app/views/student.html'
     })
     .otherwise({
       redirectTo: '/'

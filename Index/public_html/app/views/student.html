@@ -1,0 +1,16 @@
+<div ng-controller="CourseController">
+    
+    <h1>{{courseName}}</h1>
+        
+        <div ng-repeat="student in students">
+            
+            <input type="text" value="{{student.number}}" placeholder="Uusi opiskelija" ng-model="newStudent">
+            
+            <div ng-repeat="course in courses">
+                <div>{{course.task}}"</div>
+                <div>{{course.points}}"</div>
+            </div>
+            <button ng-click="addStudent()">Lisää opiskelija</button>
+        </div>
+    
+</div>
