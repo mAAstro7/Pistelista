@@ -1,30 +1,54 @@
 CourseApp.controller('CourseController', function ($scope, FirebaseService) {
 
     $scope.courses = FirebaseService.getCourses();
-//    $scope.courses = [{
-//            task: '',
-//            points: ''
-//        }]
-    $scope.students = [{number: ''}];
-    $scope.courseName = '';
+    $scope.students = FirebaseService.getStudents();
+    $scope.courseName = null;
 
+    $scope.addStudent = function () {
+        if ($scope.studentNumber > 0) {
+            FirebaseService.addStudent({
+                number: $scope.studentNumber
+            });
+        } else {
+            alert("Tarkista opiskelijanro!!");
+
+        }
+    }
 
     $scope.removeAllTasks = function () {
         $scope.courses = [];
     };
 
     $scope.addTask = function () {
- 
-        FirebaseService.addCourse({
-            task: $scope.newTask,
-            points: $scope.newTaskPoints
-        });
-        $scope.newTask = '';
-        $scope.newTaskPoints = '';
+
+        if ($scope.courseName != null && $scope.newTask != null) {
+            if ($scope.newTaskPoints > 0) {
+                FirebaseService.addCourse({
+                    coursename: $scope.courseName,
+                    assigment: ({task: $scope.newTask,
+                    points: $scope.newTaskPoints})
+                });
+                $scope.newTask = '';
+                $scope.newTaskPoints = '';
+            } else {
+                alert("Tarkistathan maksimipisteet!!");
+            }
+
+        } else {
+            alert("Muista lisätä kurssille/tehtävälle nimi!!");
+        }
+
+        $scope.order();
+
     };
 
     $scope.removeTask = function (index) {
-        $scope.courses.splice(index, 1);
+        FirebaseService.removeCourse(index);
+        $scope.order();
     };
+
+    $scope.order = function () {
+        FirebaseService.sortCourses();
+    }
 
 });
