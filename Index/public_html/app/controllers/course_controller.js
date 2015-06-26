@@ -2,12 +2,13 @@ CourseApp.controller('CourseController', function ($scope, FirebaseService) {
 
     $scope.tasks = FirebaseService.getTasks();
     $scope.students = FirebaseService.getStudents();
-    $scope.courseName = null;
+    $scope.currentCourse = FirebaseService.getCurrentCourse();
 
     $scope.addStudent = function () {
         if ($scope.studentNumber > 0) {
             FirebaseService.addStudent({
-                number: $scope.studentNumber
+                number: $scope.studentNumber,
+                points: ""
             });
         } else {
             alert("Tarkista opiskelijanro!!");
@@ -15,32 +16,35 @@ CourseApp.controller('CourseController', function ($scope, FirebaseService) {
         }
     }
 
-    $scope.removeAllTasks = function () {
-        $scope.tasks = [];
+    $scope.removeAll = function () {
+        FirebaseService.removeAll();
     };
 
     $scope.addTask = function () {
 
         if ($scope.courseName != null && $scope.newTask != null) {
-            if ($scope.newTaskPoints > 0) {
-                FirebaseService.addTask({
-                    coursename: $scope.courseName,
-                    tasks: ({assigment: ({task: $scope.newTask,
-                            points: $scope.newTaskPoints})})
-                });
+            if ($scope.courseName.length !== 0) {
+                if ($scope.newTaskPoints > 0) {
+                    FirebaseService.addTask({
+                        coursename: $scope.courseName,
+                        tasks: ({assigment: ({task: $scope.newTask,
+                                points: $scope.newTaskPoints})})
+                    });
+                    FirebaseService.updateCurrentCourse({name: $scope.courseName});
+                    $scope.newTask = null;
+                    $scope.newTaskPoints = '';
+                    $scope.currentCourse = $scope.courseName;
 
-                $scope.newTask = '';
-                $scope.newTaskPoints = '';
-                $scope.courseName = $scope.courseName;
+                } else {
+                    alert("Tarkistathan maksimipisteet!!");
+                }
             } else {
-                alert("Tarkistathan maksimipisteet!!");
+                alert("Muista laittaa kurssin nimi takaisin!");
             }
 
         } else {
             alert("Muista lisätä kurssille/tehtävälle nimi!!");
         }
-
-        $scope.order();
 
     };
 
@@ -57,8 +61,5 @@ CourseApp.controller('CourseController', function ($scope, FirebaseService) {
         FirebaseService.sortTasks();
     }
 
-    $scope.myFilter = function (item) {
-        return false;
-    };
 
 });

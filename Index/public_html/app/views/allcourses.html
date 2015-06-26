@@ -14,15 +14,20 @@ and open the template in the editor.
 
         <div>
             <table>
+                <tr>
+                    <td><b>Kurssi</b></td>
+                    <td><b>Tehtävä</b></td>
+                    <td><b>Maksimi pisteet</b></td>
+                </tr>
                 <tr ng-repeat="task in tasks| orderBy:'coursename'">
                     <td>{{task.coursename}}</td>
                     <td>{{task.tasks.assigment.task}}</td>
                     <td>{{task.tasks.assigment.points}}</td>
-                    <td><button ng-click="removeTask($index)">Poista</button></td>
                 </tr>
             </table>
         </div>
 
         <div><a href="#/course">Lisää kurssi ja tehtäviä!</a></div>
+        <button ng-click="removeAll()">Poista kaikki</button>
     </body>
 </html>

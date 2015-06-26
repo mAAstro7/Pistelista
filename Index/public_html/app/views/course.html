@@ -1,7 +1,7 @@
 <div ng-controller="CourseController">
     <div>Kurssin nimi<div>
 
-            <input type="text" placeholder="Kurssin nimi" ng-model="courseName">
+            <input type="text" ng-id="courseName" ng-model="courseName">
             <div id="kurssi-container">
                 <br>
                 <table> 
@@ -18,7 +18,7 @@
 
                         <td><button ng-click="addTask()">Lisää tehtävä</button></td>
                     </tr>
-                    <!--                    <tr><td>Tehtävä </td><td>Maksimipisteet</td></tr>-->
+             
                     <tr ng-repeat="task in tasks" ng-if="task.coursename == courseName.valueOf()">
                         <td>{{task.tasks.assigment.task}}</td>
                         <td>{{task.tasks.assigment.points}}</td>
