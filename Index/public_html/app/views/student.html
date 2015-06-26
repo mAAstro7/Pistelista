@@ -1,8 +1,19 @@
 <div ng-controller="CourseController">
     <input type="text" placeholder="Opiskelija nro" ng-model="studentNumber">
     <button ng-click="addStudent()">Lisää opiskelija</button>
+    {{courseName}} asdsd
     
-    <div ng-repeat="course in courses | orderBy: 'coursename'">
-            <div>{{course.assigment.task}} <textarea rows="1" cols="2">  </textarea> {{course.assigment.points}}</div>
-        </div>
+    <table>
+        <tr ng-repeat="student in students">
+            <td>{{student.number}}</td>
+            <td ng-repeat="task in tasks">
+            {{task.tasks.assigment.task}}
+            <textarea rows="1" cols="2"></textarea>
+            {{task.tasks.assigment.points}}
+            
+        </tr>
+    </table>
+    
+    <div><a href="#/">Tarkastele kursseja ja opiskelijoita (etusivu)</a></div>
+    
     </div>

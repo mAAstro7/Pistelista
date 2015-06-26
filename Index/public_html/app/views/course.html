@@ -1,26 +1,33 @@
 <div ng-controller="CourseController">
     <div>Kurssin nimi<div>
-    <input type="text" placeholder="Kurssin nimi" ng-model="courseName">
-    <div id="kurssi-container">
 
-        <div>Tehtävä</div>
-        <textarea ng-model="newTask">
-        </textarea>
-        <div>Maksimi pisteet</div>
-        <textarea ng-model="newTaskPoints">
-        </textarea>
-        <button ng-click="addTask()">Lisää tehtävä</button>
-        <br>
-        <label>Tehtävä - - - - -  - - - - - - Maksimipisteet</label>
+            <input type="text" placeholder="Kurssin nimi" ng-model="courseName">
+            <div id="kurssi-container">
+                <br>
+                <table> 
+                    <tr>
+                        <td>Tehtävä</td>
+                        <td>Maksimi pisteet</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <textarea ng-model="newTask"></textarea>
+                        </td>
+                        <td><textarea ng-model="newTaskPoints">
+                            </textarea></td>
 
-        <br>
-        <div ng-repeat="course in courses | orderBy: 'coursename'">
-            <input type="text" value="{{course.assigment.task}}" >
-            <input type="text" value="{{course.assigment.points}}">
-            <button ng-click="removeTask($index)">Poista</button>
+                        <td><button ng-click="addTask()">Lisää tehtävä</button></td>
+                    </tr>
+                    <!--                    <tr><td>Tehtävä </td><td>Maksimipisteet</td></tr>-->
+                    <tr ng-repeat="task in tasks" ng-if="task.coursename == courseName.valueOf()">
+                        <td>{{task.tasks.assigment.task}}</td>
+                        <td>{{task.tasks.assigment.points}}</td>
+                        <td><button ng-click="removeTask($index)">Poista</button></td>
+
+                    </tr>
+                </table>
+
+            </div>
+            <a href="#/student">Lisää kurssit</a>
+
         </div>
-
-    </div>
-    <a href="#/student">Lisää kurssit</a>
-
-</div>

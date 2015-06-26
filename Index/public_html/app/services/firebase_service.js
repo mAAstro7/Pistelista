@@ -1,35 +1,44 @@
 CourseApp.service('FirebaseService', function ($firebase) {
-    var firebaseRef = new Firebase('https://glowing-fire-807.firebaseio.com/courses');
+    var firebaseRef = new Firebase('https://glowing-fire-807.firebaseio.com/tasks');
     var sync = $firebase(firebaseRef);
-    var courses = sync.$asArray();
-    
+    var tasks = sync.$asArray();
+
     var firebaseReference = new Firebase('https://glowing-fire-807.firebaseio.com/students');
     var sync = $firebase(firebaseReference);
     var students = sync.$asArray();
-    
-    this.addCourse = function (course) {
-        courses.$add(course);
+
+
+    this.addTask = function (task) {
+
+        tasks.$add(task);
+
+    }
+
+
+    this.getTasks = function () {
+        return tasks;
+    }
+
+ 
+    this.removeTask = function (task) {
+        tasks.$remove(task);
     }
     
-    this.getCourses = function () {
-        return courses;
+      this.removeStudent = function (student) {
+        students.$remove(student);
     }
-    
-      this.removeCourse = function (task) {
-        courses.$remove(task);
-    }
-    
-    this.sortCourses = function() {
+
+    this.sortTasks = function () {
         //jotain tänne
     }
-    
+
 
     this.addStudent = function (student) {
         students.$add(student);
     }
-    
+
     this.getStudents = function () {
         return students;
     }
-    
+
 });

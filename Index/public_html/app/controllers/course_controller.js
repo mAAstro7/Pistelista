@@ -1,6 +1,6 @@
 CourseApp.controller('CourseController', function ($scope, FirebaseService) {
 
-    $scope.courses = FirebaseService.getCourses();
+    $scope.tasks = FirebaseService.getTasks();
     $scope.students = FirebaseService.getStudents();
     $scope.courseName = null;
 
@@ -16,20 +16,22 @@ CourseApp.controller('CourseController', function ($scope, FirebaseService) {
     }
 
     $scope.removeAllTasks = function () {
-        $scope.courses = [];
+        $scope.tasks = [];
     };
 
     $scope.addTask = function () {
 
         if ($scope.courseName != null && $scope.newTask != null) {
             if ($scope.newTaskPoints > 0) {
-                FirebaseService.addCourse({
+                FirebaseService.addTask({
                     coursename: $scope.courseName,
-                    assigment: ({task: $scope.newTask,
-                    points: $scope.newTaskPoints})
+                    tasks: ({assigment: ({task: $scope.newTask,
+                            points: $scope.newTaskPoints})})
                 });
+
                 $scope.newTask = '';
                 $scope.newTaskPoints = '';
+                $scope.courseName = $scope.courseName;
             } else {
                 alert("Tarkistathan maksimipisteet!!");
             }
@@ -43,12 +45,20 @@ CourseApp.controller('CourseController', function ($scope, FirebaseService) {
     };
 
     $scope.removeTask = function (index) {
-        FirebaseService.removeCourse(index);
+        FirebaseService.removeTask(index);
         $scope.order();
     };
 
+    $scope.removeStudent = function (index) {
+        FirebaseService.removeStudent(index);
+    };
+
     $scope.order = function () {
-        FirebaseService.sortCourses();
+        FirebaseService.sortTasks();
     }
+
+    $scope.myFilter = function (item) {
+        return false;
+    };
 
 });

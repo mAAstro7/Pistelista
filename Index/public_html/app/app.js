@@ -4,6 +4,10 @@ CourseApp.config(function($routeProvider){
     $routeProvider
     .when('/', {
       controller: 'CourseController',
+      templateUrl: 'app/views/allcourses.html'
+    })
+    .when('/course', {
+      controller: 'CourseController',
       templateUrl: 'app/views/course.html'
     })
     .when('/student', {
