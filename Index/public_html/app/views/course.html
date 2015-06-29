@@ -1,6 +1,5 @@
 <div ng-controller="CourseController">
     <div>Kurssin nimi<div>
-
             <input type="text" ng-id="courseName" ng-model="courseName">
             <div id="kurssi-container">
                 <br>
@@ -11,10 +10,9 @@
                     </tr>
                     <tr>
                         <td>
-                            <textarea ng-model="newTask"></textarea>
+                            <input type="text" ng-id="newTask" ng-model="newTask">
                         </td>
-                        <td><textarea ng-model="newTaskPoints">
-                            </textarea></td>
+                        <td><input type="text" ng-id="newTaskPoints" ng-model="newTaskPoints"></td>
 
                         <td><button ng-click="addTask()">Lisää tehtävä</button></td>
                     </tr>

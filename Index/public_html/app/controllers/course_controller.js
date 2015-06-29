@@ -3,12 +3,12 @@ CourseApp.controller('CourseController', function ($scope, FirebaseService) {
     $scope.tasks = FirebaseService.getTasks();
     $scope.students = FirebaseService.getStudents();
     $scope.currentCourse = FirebaseService.getCurrentCourse();
-
     $scope.addStudent = function () {
         if ($scope.studentNumber > 0) {
             FirebaseService.addStudent({
                 number: $scope.studentNumber,
-                points: ""
+                points: "",
+                course: ""
             });
         } else {
             alert("Tarkista opiskelijanro!!");
@@ -53,6 +53,11 @@ CourseApp.controller('CourseController', function ($scope, FirebaseService) {
         $scope.order();
     };
 
+     $scope.getCourse = function () {
+ 
+        return "Ohpe"
+    };
+    
     $scope.removeStudent = function (index) {
         FirebaseService.removeStudent(index);
     };

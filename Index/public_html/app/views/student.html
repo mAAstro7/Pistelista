@@ -1,5 +1,5 @@
 <div ng-controller="CourseController">
-    <p>Lisää opiskelijoita kurssille <label ng-id="course" ng-repeat="c in currentCourse">{{c.name}}</label></p>
+    <p>Lisää opiskelijoita kurssille <label type="text" ng-id="course" ng-model="course" ng-repeat="c in currentCourse">{{c.name}}</label></p>
     <input type="text" placeholder="Opiskelija nro" ng-model="studentNumber">
     <button ng-click="addStudent()">Lisää opiskelija</button>
 
@@ -10,7 +10,7 @@
             <td>{{student.number}}</td>
             <td ng-repeat="task in tasks">
                 {{task.tasks.assigment.task}}
-                <textarea rows="1" cols="2"></textarea>
+                <textarea rows="1" cols="2">{{student.points}}</textarea>
                 / {{task.tasks.assigment.points}} </br>
             <td><button ng-click="removeStudent($index)">Poista</button></td>
         </tr>

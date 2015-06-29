@@ -46,7 +46,8 @@ CourseApp.service('FirebaseService', function ($firebase) {
     }
     
     this.getCurrentCourse = function () {
-        return currentCourse;
+
+        return currentCourse
     }
     
     this.updateCurrentCourse = function (name) {
