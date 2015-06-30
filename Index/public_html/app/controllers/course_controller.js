@@ -3,12 +3,13 @@ CourseApp.controller('CourseController', function ($scope, FirebaseService) {
     $scope.tasks = FirebaseService.getTasks();
     $scope.students = FirebaseService.getStudents();
     $scope.currentCourse = FirebaseService.getCurrentCourse();
+
     $scope.addStudent = function () {
         if ($scope.studentNumber > 0) {
             FirebaseService.addStudent({
                 number: $scope.studentNumber,
                 points: "",
-                course: ""
+                course: 'Weso'
             });
         } else {
             alert("Tarkista opiskelijanro!!");
@@ -34,6 +35,7 @@ CourseApp.controller('CourseController', function ($scope, FirebaseService) {
                     $scope.newTask = null;
                     $scope.newTaskPoints = '';
                     $scope.currentCourse = $scope.courseName;
+                    $scope.Testing = $scope.courseName;
 
                 } else {
                     alert("Tarkistathan maksimipisteet!!");
@@ -53,11 +55,14 @@ CourseApp.controller('CourseController', function ($scope, FirebaseService) {
         $scope.order();
     };
 
-     $scope.getCourse = function () {
- 
-        return "Ohpe"
+    this.getCourse = function () {
+        var course = "";
+        for (c in $scope.currentCourse) {
+            course = c.name;
+        }
+        return course;
     };
-    
+
     $scope.removeStudent = function (index) {
         FirebaseService.removeStudent(index);
     };

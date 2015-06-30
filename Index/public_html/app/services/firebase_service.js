@@ -6,7 +6,7 @@ CourseApp.service('FirebaseService', function ($firebase) {
     var firebaseReference = new Firebase('https://glowing-fire-807.firebaseio.com/students');
     var sync = $firebase(firebaseReference);
     var students = sync.$asArray();
-    
+
     var firebaseRefer = new Firebase('https://glowing-fire-807.firebaseio.com/currentCourse');
     var sync = $firebase(firebaseRefer);
     var currentCourse = sync.$asArray();
@@ -23,12 +23,12 @@ CourseApp.service('FirebaseService', function ($firebase) {
         return tasks;
     }
 
- 
+
     this.removeTask = function (task) {
         tasks.$remove(task);
     }
-    
-      this.removeStudent = function (student) {
+
+    this.removeStudent = function (student) {
         students.$remove(student);
     }
 
@@ -44,17 +44,17 @@ CourseApp.service('FirebaseService', function ($firebase) {
     this.getStudents = function () {
         return students;
     }
-    
+
     this.getCurrentCourse = function () {
 
-        return currentCourse
+        return currentCourse;
     }
-    
+
     this.updateCurrentCourse = function (name) {
         firebaseRefer.remove();
         currentCourse.$add(name);
     }
-    
+
     this.removeAll = function () {
         firebaseRef.remove();
         firebaseReference.remove();
