@@ -9,7 +9,7 @@ CourseApp.controller('CourseController', function ($scope, FirebaseService) {
             FirebaseService.addStudent({
                 number: $scope.studentNumber,
                 points: "",
-                course: 'Weso'
+                course: $scope.currentCourse[0].name
             });
         } else {
             alert("Tarkista opiskelijanro!!");
@@ -53,14 +53,6 @@ CourseApp.controller('CourseController', function ($scope, FirebaseService) {
     $scope.removeTask = function (index) {
         FirebaseService.removeTask(index);
         $scope.order();
-    };
-
-    this.getCourse = function () {
-        var course = "";
-        for (c in $scope.currentCourse) {
-            course = c.name;
-        }
-        return course;
     };
 
     $scope.removeStudent = function (index) {

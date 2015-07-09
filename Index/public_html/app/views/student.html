@@ -1,16 +1,17 @@
 <div ng-controller="CourseController">
-    <p>Lisää opiskelijoita kurssille <label type="text" ng-id="course" ng-model="course" ng-repeat="c in currentCourse">{{c.name}}</label></p>
+    <p>Lisää opiskelijoita kurssille <label type="text" ng-id="course" ng-model="course">{{currentCourse[0].name}}</label></p>
     <input type="text" placeholder="Opiskelija nro" ng-model="studentNumber">
     <button ng-click="addStudent()">Lisää opiskelija</button>
-    <table ng-repeat="cname in currentCourse">
+    <table>
         <tr>
         </tr>
-        <tr ng-repeat="student in students" ng-if="student.course === cname.name">
+        <tr ng-repeat="student in students" ng-if="student.course === currentCourse[0].name">
             <td>{{student.number}}</td>
-            <td ng-repeat="task in tasks" ng-if="cname.name === task.coursename">
+            <td ng-repeat="task in tasks" ng-if="currentCourse[0].name === task.coursename">
                 {{task.tasks.assigment.task}}
-                <textarea ng-id="number" rows="1" cols="2">{{student.points}}</textarea>
+                <textarea ng-id="number" rows="1" cols="2">{{getStudentPoint(student.number, task.coursename, task.tasks.assigment.task)}}</textarea>
                 / {{task.tasks.assigment.points}} </br>
+            </td>
             <td><button ng-click="removeStudent($index)">Poista</button></td>
         </tr>
 
